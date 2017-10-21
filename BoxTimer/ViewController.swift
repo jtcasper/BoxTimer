@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import AVFoundation
+
 
 class ViewController: UIViewController {
     
@@ -14,18 +16,27 @@ class ViewController: UIViewController {
     @IBOutlet weak var countdownTimer: UILabel!
     @IBOutlet weak var startButton: UIButton!
     
-    var minutes = 3
-    var seconds = 0
+    var minutes = 0
+    var seconds = 2
     var running = false
     var timer: Timer!
     
     let dateFormatter = DateFormatter()
+//    let soundPath =
+    let bellSound = URL(fileURLWithPath: Bundle.main.path(forResource: "bell", ofType: "mp3")!)
+    var bellPlayer = AVAudioPlayer()
     
     
 
     override func viewDidLoad() {
         super.viewDidLoad()
         dateFormatter.dateFormat = "mm:ss"
+        do {
+            try self.bellPlayer = AVAudioPlayer(contentsOf: self.bellSound)
+            self.bellPlayer.prepareToPlay()
+        } catch {
+            print(error)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,6 +65,7 @@ class ViewController: UIViewController {
     //MARK: Private Functions
     @objc private func decrementTime() {
         if seconds == 0 && minutes == 0 {
+            bellPlayer.play()
             startButton.backgroundColor = UIColor.red
         } else if seconds == 0 {
             minutes -= 1

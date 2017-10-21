@@ -13,6 +13,7 @@
 		4959DB4D1F91A830006866AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4959DB4C1F91A830006866AA /* Assets.xcassets */; };
 		4959DB501F91A830006866AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4959DB4E1F91A830006866AA /* LaunchScreen.storyboard */; };
 		4959DB5B1F91A830006866AA /* BoxTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4959DB5A1F91A830006866AA /* BoxTimerTests.swift */; };
+		4984D3EE1F9BE59700E5642B /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4984D3ED1F9BE59700E5642B /* bell.mp3 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +37,7 @@
 		4959DB561F91A830006866AA /* BoxTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4959DB5A1F91A830006866AA /* BoxTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxTimerTests.swift; sourceTree = "<group>"; };
 		4959DB5C1F91A830006866AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4984D3ED1F9BE59700E5642B /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 		4959DB391F91A830006866AA = {
 			isa = PBXGroup;
 			children = (
+				4984D3E81F9BE3DD00E5642B /* Resources */,
 				4959DB441F91A830006866AA /* BoxTimer */,
 				4959DB591F91A830006866AA /* BoxTimerTests */,
 				4959DB431F91A830006866AA /* Products */,
@@ -94,6 +97,14 @@
 				4959DB5C1F91A830006866AA /* Info.plist */,
 			);
 			path = BoxTimerTests;
+			sourceTree = "<group>";
+		};
+		4984D3E81F9BE3DD00E5642B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				4984D3ED1F9BE59700E5642B /* bell.mp3 */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -182,6 +193,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4959DB501F91A830006866AA /* LaunchScreen.storyboard in Resources */,
+				4984D3EE1F9BE59700E5642B /* bell.mp3 in Resources */,
 				4959DB4D1F91A830006866AA /* Assets.xcassets in Resources */,
 				4959DB4B1F91A830006866AA /* Main.storyboard in Resources */,
 			);
@@ -414,6 +426,7 @@
 				4959DB611F91A830006866AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4959DB621F91A830006866AA /* Build configuration list for PBXNativeTarget "BoxTimerTests" */ = {
 			isa = XCConfigurationList;
@@ -422,6 +435,7 @@
 				4959DB641F91A830006866AA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
