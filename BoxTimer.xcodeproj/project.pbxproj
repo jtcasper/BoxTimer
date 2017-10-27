@@ -13,6 +13,8 @@
 		4959DB4D1F91A830006866AA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4959DB4C1F91A830006866AA /* Assets.xcassets */; };
 		4959DB501F91A830006866AA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4959DB4E1F91A830006866AA /* LaunchScreen.storyboard */; };
 		4959DB5B1F91A830006866AA /* BoxTimerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4959DB5A1F91A830006866AA /* BoxTimerTests.swift */; };
+		4977AE561FA28E8400EDC07F /* OptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4977AE551FA28E8400EDC07F /* OptionsViewController.swift */; };
+		4977AE581FA28FF000EDC07F /* BoxSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4977AE571FA28FF000EDC07F /* BoxSettings.swift */; };
 		4984D3EE1F9BE59700E5642B /* bell.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 4984D3ED1F9BE59700E5642B /* bell.mp3 */; };
 /* End PBXBuildFile section */
 
@@ -37,6 +39,8 @@
 		4959DB561F91A830006866AA /* BoxTimerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoxTimerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4959DB5A1F91A830006866AA /* BoxTimerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoxTimerTests.swift; sourceTree = "<group>"; };
 		4959DB5C1F91A830006866AA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4977AE551FA28E8400EDC07F /* OptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsViewController.swift; sourceTree = "<group>"; };
+		4977AE571FA28FF000EDC07F /* BoxSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BoxSettings.swift; sourceTree = "<group>"; };
 		4984D3ED1F9BE59700E5642B /* bell.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = bell.mp3; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -81,6 +85,8 @@
 			isa = PBXGroup;
 			children = (
 				4959DB451F91A830006866AA /* AppDelegate.swift */,
+				4977AE571FA28FF000EDC07F /* BoxSettings.swift */,
+				4977AE551FA28E8400EDC07F /* OptionsViewController.swift */,
 				4959DB471F91A830006866AA /* ViewController.swift */,
 				4959DB491F91A830006866AA /* Main.storyboard */,
 				4959DB4C1F91A830006866AA /* Assets.xcassets */,
@@ -159,6 +165,11 @@
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = C82E74WB9V;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					4959DB551F91A830006866AA = {
 						CreatedOnToolsVersion = 8.3.3;
@@ -213,7 +224,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4977AE561FA28E8400EDC07F /* OptionsViewController.swift in Sources */,
 				4959DB481F91A830006866AA /* ViewController.swift in Sources */,
+				4977AE581FA28FF000EDC07F /* BoxSettings.swift in Sources */,
 				4959DB461F91A830006866AA /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

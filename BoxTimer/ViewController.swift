@@ -7,22 +7,26 @@
 //
 
 import UIKit
+import os.log
 import AVFoundation
 
 
 class ViewController: UIViewController {
     
     //MARK: Properties
-    @IBOutlet weak var countdownTimer: UILabel!
+    @IBOutlet weak var countdownTimerLabel: UILabel!
     @IBOutlet weak var startButton: UIButton!
+    @IBOutlet weak var stopButton: UIButton!
     
-    var minutes = 0
-    var seconds = 2
+    var settings: BoxSettings!
+    let settingsSeconds = 0
     var running = false
+    var roundMinutes: Int = 0
+    var breakMinutes: Int = 0
+    var seconds: Int = 0
     var timer: Timer!
     
     let dateFormatter = DateFormatter()
-//    let soundPath =
     let bellSound = URL(fileURLWithPath: Bundle.main.path(forResource: "bell", ofType: "mp3")!)
     var bellPlayer = AVAudioPlayer()
     
@@ -30,7 +34,17 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Attempt to get settings
+        if let savedSettings = loadSettings() {
+            print("sxsload")
+            settings = savedSettings
+        } else {
+            settings = BoxSettings(roundMinutes: 3, breakMinutes: 1)
+        }
         dateFormatter.dateFormat = "mm:ss"
+        roundMinutes = settings.roundMinutes
+        breakMinutes = settings.breakMinutes
+        seconds = settingsSeconds
         do {
             try self.bellPlayer = AVAudioPlayer(contentsOf: self.bellSound)
             self.bellPlayer.prepareToPlay()
@@ -50,9 +64,9 @@ class ViewController: UIViewController {
             // Timer is paused or stopped
             startButton.setTitle("Pause", for: UIControlState.normal)
             running = true
-            let timerDate = dateFormatter.date(from: "\(minutes):\(seconds)")
-            countdownTimer.text = dateFormatter.string(from: timerDate!)
-            countdownTimer.alpha = 1.0
+            let timerDate = dateFormatter.date(from: "\(roundMinutes):\(seconds)")
+            countdownTimerLabel.text = dateFormatter.string(from: timerDate!)
+            countdownTimerLabel.alpha = 1.0
             timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.decrementTime), userInfo: nil, repeats: true)
         } else {
             // Timer is running; pause it
@@ -62,19 +76,71 @@ class ViewController: UIViewController {
         }
     }
     
+    @IBAction func stopClock(_ sender: UIButton) {
+        self.stop()
+    }
+    
+    
+    
+    @IBAction func unwindToTimer(sender: UIStoryboardSegue) {
+        if let sourceViewController = sender.source as? OptionsViewController, let settings = sourceViewController.settings {
+            self.settings = settings
+            // Stop the clock and reload with new settings
+            stop()
+            
+            // Save the settings.
+            saveSettings()
+        }
+    }
+    
+
+    
+
+    
     //MARK: Private Functions
     @objc private func decrementTime() {
-        if seconds == 0 && minutes == 0 {
+        if seconds == 0 && roundMinutes == 0 {
             bellPlayer.play()
             startButton.backgroundColor = UIColor.red
         } else if seconds == 0 {
-            minutes -= 1
+            roundMinutes -= 1
             seconds = 59
         } else {
             seconds -= 1
         }
-        let timerDate = dateFormatter.date(from: "\(minutes):\(seconds)")
-        countdownTimer.text = dateFormatter.string(from: timerDate!)
+        setTimerLabel()
+    }
+    
+    // Handles stopping the countdown
+    private func stop() {
+        running = false
+        roundMinutes = settings.roundMinutes
+        breakMinutes = settings.breakMinutes
+        seconds = settingsSeconds
+        startButton.setTitle("Start the Clock", for: UIControlState.normal)
+        self.setTimerLabel()
+        if (timer != nil) {
+            timer.invalidate()
+        }
+    }
+    
+    private func setTimerLabel() {
+        let timerDate = dateFormatter.date(from: "\(roundMinutes):\(seconds)")
+        countdownTimerLabel.text = dateFormatter.string(from: timerDate!)
+    }
+    
+    private func saveSettings() {
+        let isSuccessfulSave = NSKeyedArchiver.archiveRootObject(self.settings, toFile: BoxSettings.ArchiveURL.path)
+        if isSuccessfulSave {
+            os_log("Settings successfully saved.", log: OSLog.default, type: .debug)
+            loadSettings()
+        } else {
+            os_log("Failed to save settings...", log: OSLog.default, type: .error)
+        }
+    }
+    
+    private func loadSettings() -> BoxSettings? {
+        return NSKeyedUnarchiver.unarchiveObject(withFile: BoxSettings.ArchiveURL.path) as? BoxSettings
     }
     
 
